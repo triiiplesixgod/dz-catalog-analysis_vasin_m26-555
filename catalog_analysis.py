@@ -138,3 +138,27 @@ def top_n_by_rating(movies_lst: list[dict], n: int = 3) -> list[tuple[str, float
     for movie in sorted_movies[:n]:
         top.append((movie["title"], movie["rating"]))
     return top
+
+
+def count_by_genre(movies_lst: list[dict]) -> dict[str, int]:
+    counts: dict[str, int] = {}
+
+    for movie in movies_lst:
+        for genre in movie["genres"]:
+            counts[genre] = counts.get(genre, 0) + 1
+
+    return counts
+
+def actor_filmography(movies_lst: list[dict]) -> dict[str, list[str]]:
+    filmography: dict[str, list[str]] = {}
+
+    for movie in movies_lst:
+        title = movie["title"]
+        for actor in movie["actors"]:
+            filmography[actor] = filmography.get(actor, []) + [title]
+
+    return filmography
+
+def ratings_above_average(movies_lst: list[dict]) -> dict[str, float]:
+    avg = average_rating(movies_lst)
+    return {m["title"]: m["rating"] for m in movies_lst if m["rating"] > avg}
