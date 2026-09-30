@@ -53,11 +53,6 @@ def duration_in_hours(minutes: int) -> str:
     return f'{hours}ч {mins}'
 
 
-print(average_rating(movies))
-print(catalog_age_stats(movies))
-
-
-
 
 def rating_tier(rating: float) -> str:
     norm = rating if (rating >= 0 and rating <= 10) else 0.0
@@ -79,3 +74,30 @@ def decade_label(year: int) -> str:
             return "недавние"
         case _:
             return "старые"
+
+
+print()
+print('Фильмы не жанра comedy:')
+for movie in movies:
+        if "comedy" in movie["genres"]:
+            continue
+        print(movie["title"])
+
+print()
+
+i = 0
+while i < len(movies):
+    movie = movies[i]
+    if movie["rating"] > 9.0:
+        print(f"Первый фильм с рейтингом > 9.0: {movie['title']} ({movie['rating']})")
+        break
+    i += 1
+else:
+    print("Шедевров не найдено")
+
+def count_long_movies(movies_lst: list[dict], threshold: int = 120) -> int:
+    count = 0
+    for movie in movies_lst:
+        if movie['duration_min'] > threshold:
+            count += 1
+    return count
