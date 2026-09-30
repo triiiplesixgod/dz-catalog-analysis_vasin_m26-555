@@ -33,7 +33,7 @@ def average_rating(movies_lst: list[dict]) -> float:
 
     return round(score / len(movies_lst), 1)
 
-def catalog_age_stats(movies_lst: list[dict], current_year: int = 2026) -> tuple[int, int, int]:
+def catalog_age_stats(movies_lst: list[dict], current_year: int) -> tuple[int, int, int]:
     if not movies_lst:
         return (0, 0, 0)
 
@@ -95,7 +95,7 @@ while i < len(movies):
 else:
     print("Шедевров не найдено")
 
-def count_long_movies(movies_lst: list[dict], threshold: int = 120) -> int:
+def count_long_movies(movies_lst: list[dict], threshold: int) -> int:
     count = 0
     for movie in movies_lst:
         if movie['duration_min'] > threshold:
@@ -176,3 +176,16 @@ def common_actors(movie1: dict, movie2: dict) -> set[str]:
 
 def genres_only_in_one(movies_a: list[dict], movies_b: list[dict]) -> set[str]:
     return all_genres(movies_a) - all_genres(movies_b)
+
+
+def iter_high_rated(movies_lst: list[dict], min_rating: float):
+    for movie in movies_lst:
+        if movie["rating"] >= min_rating:
+            yield movie
+
+print()
+for movie in iter_high_rated(movies, min_rating=8.0):
+    print(format_report_line(movie))
+
+print()
+total_duration = sum(m["duration_min"] for m in movies if m["rating"] > 7)
