@@ -219,6 +219,7 @@ def build_report(movies_lst: list[dict]) -> None:
 
     print()
     total_duration = sum(m["duration_min"] for m in movies if m["rating"] > 7)
+    print(total_duration)
 
 
 build_report(movies)
