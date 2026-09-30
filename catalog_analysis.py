@@ -55,3 +55,27 @@ def duration_in_hours(minutes: int) -> str:
 
 print(average_rating(movies))
 print(catalog_age_stats(movies))
+
+
+
+
+def rating_tier(rating: float) -> str:
+    norm = rating if (rating >= 0 and rating <= 10) else 0.0
+
+    if norm >= 9:
+        return "шедевр"
+    elif norm >= 7:
+        return "хорошо"
+    elif norm >= 5:
+        return "средне"
+    else:
+        return "слабо"
+
+def decade_label(year: int) -> str:
+    match year:
+        case _ if year > 2020:
+            return "новые"
+        case _ if 2015 <= year <= 2020:
+            return "недавние"
+        case _:
+            return "старые"
