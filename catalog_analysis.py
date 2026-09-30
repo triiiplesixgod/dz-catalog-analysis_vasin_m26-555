@@ -222,4 +222,5 @@ def build_report(movies_lst: list[dict]) -> None:
     print(total_duration)
 
 
-build_report(movies)
+if __name__ == "__main__":
+    build_report(movies)
